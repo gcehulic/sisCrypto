@@ -1,9 +1,16 @@
 // RSA_kriptiranje i dekriptiranje
 
-#include <Time.h>
+
+
+int timer() {
+    
+    int mili=millis();
+    return mili;
+}
 
 //Kriptiranje
 int encrypt(int text, int n, int e){
+  
    int sifrat=1;
    for(int i=0; i<e; i++){
     sifrat=sifrat*text%n;
@@ -33,6 +40,8 @@ void setup() {
   
 Serial.begin(9600);
 
+int pocetak= timer();
+
 int n=p*q;
 int FIn=(p-1)*(q-1);
 
@@ -47,8 +56,7 @@ do{
 }while(s!=1);
 d=d-1;
 
-String rijec = "Dorian i Goran";
-
+String rijec = "Dorian i Goran kriptografija";
 
 Serial.println("");
 Serial.print("Izvorni tekst: ");
@@ -74,10 +82,15 @@ String sifra="";
 
 //Kriptiranje
 Serial.print("Kriptirani tekst: ");
+
+
+
 for (int i=0; i<duljinaR;i++){
   char c = encrypt (rijec[i],n,e);
   sifra=sifra+c;
 }
+
+
 Serial.println(sifra);
 
 String dsifra="";
@@ -91,7 +104,12 @@ for (int i=0; i<duljinaS; i++){
 }
 Serial.println(dsifra);
 
+int kraj= timer();
+int trajanje= kraj-pocetak;
+Serial.print("Proteklo vrijeme: ");
+Serial.print(trajanje);
+Serial.println(" ms");
 }
 void loop() {
-  // put your main code here, to run repeatedly:
+  
 }
